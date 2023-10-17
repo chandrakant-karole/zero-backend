@@ -1,8 +1,8 @@
 import express from 'express'
-import { test, signup } from '@/src/controller/user'
+import { signup } from '~@src/controller/user'
 const router = express.Router()
-router.get('/', test)
 
+//all routes
 router.post('/signup', signup)
 
 export { router }

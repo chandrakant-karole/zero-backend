@@ -1,11 +1,6 @@
 import { model, Schema, Document } from "mongoose"
 
-interface User {
-    name: string,
-    email: string
-}
-
-interface UserSignup {
+export interface UserDocument extends Document {
     username: string,
     firstName: string,
     lastName: string,
@@ -15,18 +10,16 @@ interface UserSignup {
     termsAndConditions: boolean
 }
 
-const UserSchema = new Schema<User>({
-    name: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true
-    }
-})
-
-const UserModel = model<User>('User', UserSchema)
+interface UserSignup {
+    username: string,
+    firstName: string,
+    lastName: string,
+    contactNumber: number,
+    email: string,
+    password: string,
+    termsAndConditions: boolean,
+    createdAt: Date
+}
 
 // ======================== signup ============================
 const userSignup = new Schema<UserSignup>({
@@ -56,9 +49,14 @@ const userSignup = new Schema<UserSignup>({
     termsAndConditions: {
         type: Boolean,
         require: true
+    },
+    createdAt: {
+        type: Date,
+        immutable:true,
+        default: Date.now()
     }
 })
 
-const SignupModel = model<UserSignup>('UserSignup', userSignup)
+const UserModel = model<UserSignup>('users', userSignup) //first argument is collection name
 
-export { UserModel, SignupModel };
+export default UserModel

@@ -1,15 +1,8 @@
 import { Request, Response } from "express";
-import { SignupModel } from "@/src/models/users";
-
-const test = async (req: Request, res: Response) => {
-    res.json({ name: 'test run' })
-}
-
+import { createUser } from "~@src/services/user.services";
 const signup = async (req: Request, res: Response) => {
-    const data = new SignupModel(req.body)
-    const result = await data.save()
-    console.log(result);
-    res.send(result)
+    const data = await createUser(req.body)
+    res.send(data)
 }
 
-export { test, signup }
+export { signup }
