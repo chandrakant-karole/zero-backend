@@ -1,26 +1,5 @@
-import { model, Schema, Document } from "mongoose"
-
-export interface UserDocument extends Document {
-    username: string,
-    firstName: string,
-    lastName: string,
-    contactNumber: number,
-    email: string,
-    password: string,
-    termsAndConditions: boolean
-}
-
-interface UserSignup {
-    username: string,
-    firstName: string,
-    lastName: string,
-    contactNumber: number,
-    email: string,
-    password: string,
-    termsAndConditions: boolean,
-    createdAt: Date
-}
-
+import { model, Schema } from "mongoose"
+import { UserSignup } from "./users.types"
 // ======================== signup ============================
 const userSignup = new Schema<UserSignup>({
     username: {
@@ -52,7 +31,7 @@ const userSignup = new Schema<UserSignup>({
     },
     createdAt: {
         type: Date,
-        immutable:true,
+        immutable: true,
         default: Date.now()
     }
 })

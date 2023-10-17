@@ -1,13 +1,13 @@
 import { ObtainDocumentType, FilterQuery, UpdateQuery, QueryOptions } from 'mongoose'
-import UserModel, { UserDocument } from '~@src/models/users'
-
+import UserModel from '~@src/models/users'
+import { UserDocument, UserLogin } from '~@src/models/users.types'
 //adding new user
 export function createUser(input: ObtainDocumentType<UserDocument>) {
     return UserModel.create(input)
 }
 
 //finding user 
-export function findUser(query: FilterQuery<UserDocument>, options: QueryOptions = { lean: true }) {
+export function findUser(query: FilterQuery<UserLogin>, options: QueryOptions = { lean: true }) {
     return UserModel.find(query, {}, options)
 }
 
